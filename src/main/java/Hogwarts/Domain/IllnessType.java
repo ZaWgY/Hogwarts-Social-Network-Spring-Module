@@ -18,6 +18,10 @@ public class IllnessType {
         return id;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public String getType() {
         return type;
     }

@@ -26,6 +26,9 @@ public class Dish {
         this.cookingTime = cookingTime;
     }
 
+    public Dish() {
+    }
+
     public Integer getId() {
         return id;
     }

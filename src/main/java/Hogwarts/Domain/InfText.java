@@ -18,6 +18,9 @@ public class InfText {
         this.infText = infText;
     }
 
+    public InfText() {
+    }
+
     public Integer getId() {
         return id;
     }

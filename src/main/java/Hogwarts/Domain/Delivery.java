@@ -14,6 +14,9 @@ public class Delivery {
         this.numberOfServing = numberOfServing;
     }
 
+    public Delivery() {
+    }
+
     public Integer getId() {
         return id;
     }

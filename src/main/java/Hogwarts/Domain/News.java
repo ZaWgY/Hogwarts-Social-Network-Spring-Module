@@ -16,6 +16,9 @@ public class News {
         this.name = name;
     }
 
+    public News() {
+    }
+
     public Integer getId() {
         return id;
     }

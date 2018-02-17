@@ -30,6 +30,9 @@ public class Raid {
         this.illnessProbability = illnessProbability;
     }
 
+    public Raid() {
+    }
+
     public Integer getId() {
         return id;
     }

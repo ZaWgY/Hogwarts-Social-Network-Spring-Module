@@ -20,6 +20,9 @@ public class Hospital {
         this.comments = comments;
     }
 
+    public Hospital() {
+    }
+
     public Integer getId() {
         return id;
     }

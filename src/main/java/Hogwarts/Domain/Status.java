@@ -14,6 +14,9 @@ public class Status {
         this.status = status;
     }
 
+    public Status() {
+    }
+
     public Integer getId() {
         return id;
     }

@@ -26,6 +26,9 @@ public class People {
         this.statusId = statusId;
     }
 
+    public People() {
+    }
+
     public Integer getId() {
         return id;
     }

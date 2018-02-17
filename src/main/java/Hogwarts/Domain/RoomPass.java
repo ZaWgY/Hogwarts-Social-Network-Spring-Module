@@ -17,6 +17,9 @@ public class RoomPass {
             this.roomPassword = room_password;
         }
 
+    public RoomPass() {
+    }
+
     public Integer getId() {
         return id;
     }

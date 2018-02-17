@@ -14,6 +14,9 @@ public class Faculty {
         this.points = points;
     }
 
+    public Faculty() {
+    }
+
     public String getName() {
         return name;
     }

@@ -19,6 +19,9 @@ public class Illness {
         this.typeId = typeId;
     }
 
+    public Illness() {
+    }
+
     public Integer getId() {
         return id;
     }

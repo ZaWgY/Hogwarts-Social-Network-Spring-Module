@@ -21,6 +21,9 @@ public class PersonalArea {
         this.isHealthy = is_healthy;
     }
 
+    public PersonalArea() {
+    }
+
     public String getName() {
         return name;
     }

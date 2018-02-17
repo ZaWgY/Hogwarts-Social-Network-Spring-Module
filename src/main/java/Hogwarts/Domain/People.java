@@ -3,6 +3,7 @@ package Hogwarts.Domain;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "PEOPLE")
 public class People {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

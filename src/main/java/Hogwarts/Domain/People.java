@@ -1,0 +1,90 @@
+package Hogwarts.Domain;
+
+import javax.persistence.*;
+
+@Entity
+public class People {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    private String name;
+    private String surname;
+    private String login;
+    @Column(name="p_password")
+    private String password;
+    @Column(name="id_status")
+    private Integer statusId;
+    private Integer health = 100;
+    private Integer fatigue = 0;
+
+    public People(String name, String surname, String login, String password, Integer statusId) {
+        this.name = name;
+        this.surname = surname;
+        this.login = login;
+        this.password = password;
+        this.statusId = statusId;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id){
+        this.id = id;
+    }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Integer getStatusId() {
+        return statusId;
+    }
+
+    public void setStatusId(Integer statusId) {
+        this.statusId = statusId;
+    }
+
+    public Integer getHealth() {
+        return health;
+    }
+
+    public void setHealth(Integer health) {
+        this.health = health;
+    }
+
+    public Integer getFatigue() {
+        return fatigue;
+    }
+
+    public void setFatigue(Integer fatigue) {
+        this.fatigue = fatigue;
+    }
+}

@@ -3,10 +3,12 @@ package Hogwarts.Service;
 
 import Hogwarts.Domain.Status;
 
+import java.util.List;
+
 public interface StatusService {
 
     void remove(int id);
-    Iterable<Status> findAll();
+    List<Status> findAll();
     Status find(int id);
     void delete(Status status);
     void save(Status status);

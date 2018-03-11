@@ -41,4 +41,55 @@ public class PeopleServiceImpl implements PeopleService {
     public void save(People people) {
         peopleRepository.save(people);
     }
+
+    @Override
+    public boolean checkAvailable(String username) {
+        List<People> list = new ArrayList<>();
+        peopleRepository.findAll().forEach(list::add);
+        for (People p: list) {
+            if (p.getLogin() == null || p.getLogin().isEmpty()){
+                continue;
+            }
+            if ( p.getLogin().equals(username)){
+
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public int checkUser(People people) {
+        int returnValue = 0;
+        List<People> list = new ArrayList<>();
+        peopleRepository.findAll().forEach(list::add);
+        for (People p :list) {
+            if (p.getLogin() == null || p.getLogin().isEmpty()){
+                continue;
+            }
+            if (p.getEmail() == null || p.getEmail().isEmpty()){
+                continue;
+            }
+            if (p.getLogin().equals(people.getLogin()) || p.getEmail().equals(people.getLogin())){
+                returnValue = 1;
+                if(p.getPassword().equals(people.getPassword())){
+                    returnValue = 2;
+                }
+            }
+        }
+        return returnValue;
+    }
+
+    @Override
+    public List<People> listOfAdmins() {
+        List<People> returnedList = new ArrayList<>();
+        List<People> list = new ArrayList<>();
+        peopleRepository.findAll().forEach(list::add);
+        for (People p:list) {
+            if(p.getStatusId() == 1){
+                returnedList.add(p);
+            }
+        }
+        return returnedList;
+    }
 }

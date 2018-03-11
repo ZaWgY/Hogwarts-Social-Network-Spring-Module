@@ -29,6 +29,7 @@ public class StatusController {
         statusService.save(new Status("Teacher"));
         statusService.save(new Status("Moder"));
         statusService.save(new Status("Admin"));
+        statusService.save(new Status("Undecided"));
     }
 
 

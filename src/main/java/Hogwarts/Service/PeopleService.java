@@ -9,4 +9,7 @@ public interface PeopleService {
     List<People> listAll();
     People find(int id);
     void save(People people);
+    boolean checkAvailable(String username);
+    int checkUser(People people);
+    List<People> listOfAdmins();
 }

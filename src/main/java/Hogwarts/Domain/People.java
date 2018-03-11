@@ -13,17 +13,21 @@ public class People {
     private String login;
     @Column(name="p_password")
     private String password;
+    private String email;
+    private String facultyId;
     @Column(name="id_status")
     private Integer statusId;
     private Integer health = 100;
     private Integer fatigue = 0;
 
-    public People(String name, String surname, String login, String password, Integer statusId) {
+    public People(String name, String surname, String login, String password, Integer statusId, String email,String facultyId) {
         this.name = name;
         this.surname = surname;
         this.login = login;
         this.password = password;
         this.statusId = statusId;
+        this.email = email;
+        this.facultyId = facultyId;
     }
 
     public People() {
@@ -84,11 +88,27 @@ public class People {
         this.health = health;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public Integer getFatigue() {
         return fatigue;
     }
 
     public void setFatigue(Integer fatigue) {
         this.fatigue = fatigue;
+    }
+
+    public String getFacultyId() {
+        return facultyId;
+    }
+
+    public void setFacultyId(String facultyId) {
+        this.facultyId = facultyId;
     }
 }

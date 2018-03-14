@@ -12,4 +12,7 @@ public interface PeopleService {
     boolean checkAvailable(String username);
     int checkUser(People people);
     List<People> listOfAdmins();
+    List<People> listOfUndecided();
+    void approoveUser(People people);
+    void removeAll();
 }

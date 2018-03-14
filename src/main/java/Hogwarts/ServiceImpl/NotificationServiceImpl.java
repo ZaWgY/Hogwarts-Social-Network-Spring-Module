@@ -9,6 +9,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class NotificationServiceImpl implements NotificationService {
 
@@ -32,14 +34,16 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public void sendRegInfoNotification(People people) {
-        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        simpleMailMessage.setTo(people.getEmail());
-        simpleMailMessage.setFrom("hogwartssocialnetwork@gmail.com");
-        simpleMailMessage.setSubject("Hogwarts social network registration");
-        simpleMailMessage.setText("Новый пользователь оставил заявку на регистрацию, проверьте список заявок.");
-        System.out.println("Отправка сообщения..");
-        javaMailSender.send(simpleMailMessage);
-        System.out.println("Сообщение отправлено");
+    public void sendRegInfoNotification(People user, List<People> admins) {
+        for (People admin: admins) {
+            SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+            simpleMailMessage.setTo(admin.getEmail());
+            simpleMailMessage.setFrom("hogwartssocialnetwork@gmail.com");
+            simpleMailMessage.setSubject("Hogwarts social network registration");
+            simpleMailMessage.setText("Новый пользователь - " +user.getLogin()+" оставил заявку на регистрацию, проверьте список заявок.");
+            System.out.println("Отправка сообщения..");
+            javaMailSender.send(simpleMailMessage);
+            System.out.println("Сообщение отправлено");
+        }
     }
 }

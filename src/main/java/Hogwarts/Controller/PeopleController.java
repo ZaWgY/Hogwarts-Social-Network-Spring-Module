@@ -30,7 +30,12 @@ public class PeopleController {
 
     @RequestMapping(value = "/addHuman", method = RequestMethod.GET)
     public void addTestHuman(){
-        peopleService.save(new People("Naruto","Uzumaki","login","password",1,"Kartofel@mail.ru","Gryffindor"));
+        peopleService.save(new People("Naruto","Uzumaki","login1","password",1,"Kartofel@mail.ru","Gryffindor"));
+        peopleService.save(new People("Boruto","Uzumaki","login2","password",2,"Kartofel@mail.ru","Gryffindor"));
+        peopleService.save(new People("Sakura","Uzumaki","login3","password",3,"Kartofel@mail.ru","Gryffindor"));
+        peopleService.save(new People("Sasuke","Uzumaki","login4","password",4,"Kartofel@mail.ru","Gryffindor"));
+        peopleService.save(new People("Kakashi","Uzumaki","login5","password",3,"Kartofel@mail.ru","Gryffindor"));
+        peopleService.save(new People("Kawaki","Uzumaki","login6","password",4,"Kartofel@mail.ru","Gryffindor"));
     }
     @RequestMapping(value = "/registerPerson", method = RequestMethod.POST)
     public ResponseEntity registerUser(@RequestBody People people){
@@ -41,9 +46,11 @@ public class PeopleController {
                 notificationService.sendRegistrationNotification(people);
             }catch(Exception e){
                 System.out.println("Почта не валидна");
+                e.printStackTrace();
                 return ResponseEntity.ok(HttpStatus.BAD_REQUEST);
             }
-            peopleService.save(people);
+            peopleService.save(new People(people.getName(),people.getSurname(),people.getLogin(),people.getPassword(),4,people.getEmail(),"undecided"));
+            notificationService.sendRegInfoNotification(new People(people.getName(),people.getSurname(),people.getLogin(),people.getPassword(),4,people.getEmail(),"undecided"),peopleService.listOfAdmins());
             return ResponseEntity.ok(HttpStatus.OK);
         }
         return ResponseEntity.ok(HttpStatus.CONFLICT);
@@ -62,5 +69,24 @@ public class PeopleController {
             return ResponseEntity.ok(HttpStatus.FOUND);
         }
         return  ResponseEntity.ok(HttpStatus.BAD_REQUEST);
+    }
+    @RequestMapping(value = "/undecidedUsers", method = RequestMethod.GET)
+    public List<People> getAllUndecidedUsers(){
+        System.out.println("Запрос на получение всех неутверждённых пользователей");
+        return peopleService.listOfUndecided();
+    }
+    @RequestMapping(value = "/adminList", method = RequestMethod.GET)
+    public List<People> getAdminList(){
+        System.out.println("Запрос на получение всех админов");
+        return peopleService.listOfAdmins();
+    }
+    @RequestMapping(value = "/approveUser", method = RequestMethod.POST)
+    public void approveUser(@RequestBody People people){
+        System.out.println("Дарова");
+        this.peopleService.approoveUser(people);
+    }
+    @RequestMapping(value = "/deleteAlPeople", method = RequestMethod.GET)
+    public void deleteUsers(){
+        peopleService.removeAll();
     }
 }

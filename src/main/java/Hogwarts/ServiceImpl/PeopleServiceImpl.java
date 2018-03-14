@@ -82,14 +82,30 @@ public class PeopleServiceImpl implements PeopleService {
 
     @Override
     public List<People> listOfAdmins() {
-        List<People> returnedList = new ArrayList<>();
         List<People> list = new ArrayList<>();
-        peopleRepository.findAll().forEach(list::add);
-        for (People p:list) {
-            if(p.getStatusId() == 1){
-                returnedList.add(p);
-            }
-        }
-        return returnedList;
+        peopleRepository.findAllByStatusId(3).forEach(list::add);
+        return list;
+    }
+
+    @Override
+    public List<People> listOfUndecided() {
+        List<People> list = new ArrayList<>();
+        peopleRepository.findAllByStatusId(4).forEach(list::add);
+        return list;
+    }
+
+    @Override
+    public void approoveUser(People people) {
+        People initialPerson = peopleRepository.findByLogin(people.getLogin());
+        System.out.println(initialPerson.getId()+ " - Это вот айди юзера которого мы меняем");
+        initialPerson.setStatusId(people.getStatusId());
+        initialPerson.setFacultyId(people.getFacultyId());
+        peopleRepository.save(initialPerson);
+        //        peopleRepository.setUserInfoById(people.getFacultyId(),people.getStatusId(),initialPerson.getId());
+    }
+
+    @Override
+    public void removeAll() {
+        peopleRepository.deleteAll();
     }
 }

@@ -30,12 +30,12 @@ public class PeopleController {
 
     @RequestMapping(value = "/addHuman", method = RequestMethod.GET)
     public void addTestHuman(){
-        peopleService.save(new People("Naruto","Uzumaki","login1","password",1,"Kartofel@mail.ru","Gryffindor"));
-        peopleService.save(new People("Boruto","Uzumaki","login2","password",2,"Kartofel@mail.ru","Gryffindor"));
-        peopleService.save(new People("Sakura","Uzumaki","login3","password",3,"Kartofel@mail.ru","Gryffindor"));
-        peopleService.save(new People("Sasuke","Uzumaki","login4","password",4,"Kartofel@mail.ru","Gryffindor"));
-        peopleService.save(new People("Kakashi","Uzumaki","login5","password",3,"Kartofel@mail.ru","Gryffindor"));
-        peopleService.save(new People("Kawaki","Uzumaki","login6","password",4,"Kartofel@mail.ru","Gryffindor"));
+        peopleService.save(new People("Naruto","Uzumaki","login7","password",1,"legenda2121@mail.ru","Gryffindor"));
+        peopleService.save(new People("Boruto","Uzumaki","login8","password",2,"legenda2121@mail.ru","Gryffindor"));
+        peopleService.save(new People("Sakura","Uzumaki","login9","password",3,"legenda2121@mail.ru","Gryffindor"));
+        peopleService.save(new People("Sasuke","Uzumaki","login10","password",4,"legenda2121@mail.ru","Gryffindor"));
+        peopleService.save(new People("Kakash","Uzumaki","login11","password",3,"legenda2121@mail.ru","Gryffindor"));
+        peopleService.save(new People("Kawaki","Uzumaki","login12","password",4,"legenda2121@mail.ru","Gryffindor"));
     }
     @RequestMapping(value = "/registerPerson", method = RequestMethod.POST)
     public ResponseEntity registerUser(@RequestBody People people){

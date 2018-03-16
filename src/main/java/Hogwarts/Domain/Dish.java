@@ -18,9 +18,9 @@ public class Dish {
     private String description;
 
     @Column(name = "cooking_time")
-    private LocalTime cookingTime;
+    private String cookingTime;
 
-    public Dish(String name, String description, LocalTime cookingTime) {
+    public Dish(String name, String description, String cookingTime) {
         this.name = name;
         this.description = description;
         this.cookingTime = cookingTime;
@@ -53,11 +53,11 @@ public class Dish {
         this.description = description;
     }
 
-    public LocalTime getCookingTime() {
+    public String getCookingTime() {
         return cookingTime;
     }
 
-    public void setCookingTime(LocalTime cookingTime) {
+    public void setCookingTime(String cookingTime) {
         this.cookingTime = cookingTime;
     }
 }

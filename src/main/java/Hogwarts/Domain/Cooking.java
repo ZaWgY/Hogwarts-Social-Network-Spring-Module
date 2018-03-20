@@ -11,17 +11,17 @@ public class Cooking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Integer number;
-    private Integer personId;
-    private Integer dishId;
+    private String personLogin;
+    private String dish;
     private Boolean ready;
     private Boolean given;
     private static Integer numberCounter=0;
 
     public Cooking(){}
 
-    public Cooking(Integer personId, Integer dishId, Boolean ready, Integer number) {
-        this.personId = personId;
-        this.dishId = dishId;
+    public Cooking(String personLogin, String dish, Boolean ready, Integer number) {
+        this.personLogin = personLogin;
+        this.dish = dish;
         this.ready = ready;
         this.number = number;
     }
@@ -34,20 +34,20 @@ public class Cooking {
         this.id = id;
     }
 
-    public Integer getPersonId() {
-        return personId;
+    public String getPersonLogin() {
+        return personLogin;
     }
 
-    public void setPersonId(Integer personId) {
-        this.personId = personId;
+    public void setPersonLogin(String personLogin) {
+        this.personLogin = personLogin;
     }
 
-    public Integer getDishId() {
-        return dishId;
+    public String getDish() {
+        return dish;
     }
 
-    public void setDishId(Integer dishId) {
-        this.dishId = dishId;
+    public void setDish(String dish) {
+        this.dish = dish;
     }
 
     public Boolean getReady() {

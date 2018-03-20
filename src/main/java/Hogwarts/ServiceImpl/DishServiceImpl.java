@@ -36,6 +36,7 @@ public class DishServiceImpl implements DishService {
 
     @Override
     public void save(Dish dish) {
+        System.out.println("Сохранение");
         dishRepository.save(dish);
     }
 
@@ -60,7 +61,17 @@ public class DishServiceImpl implements DishService {
         return currentDish.getId();
     }
 
+    @Override
+    public void delete(Integer id) {
+        Dish dish = dishRepository.getById(id);
+        System.out.println("Удаление блюда "+dish.getName());
+        dishRepository.delete(dish);
+    }
 
+    @Override
+    public Dish getDishByName(String dish) {
+        return dishRepository.getByName(dish);
+    }
 
 
 }

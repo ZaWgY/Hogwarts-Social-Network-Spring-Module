@@ -103,4 +103,24 @@ public class PeopleController {
     public People getPeopleByLogin(@RequestBody String login){
         return peopleService.getPeopleByLogin(login);
     }
+    @RequestMapping(value="/isDoctor", method = RequestMethod.POST)
+    public Boolean isPersonDoctor(@RequestBody String login){
+        Integer statusId = peopleService.getPeopleByLogin(login).getStatusId();
+        return statusId == 5;
+    }
+    @RequestMapping(value="/isAdmin", method = RequestMethod.POST)
+    public Boolean isPersonAdmin(@RequestBody String login){
+        Integer statusId = peopleService.getPeopleByLogin(login).getStatusId();
+        return statusId == 3;
+    }
+    @RequestMapping(value="/isTeacher", method = RequestMethod.POST)
+    public Boolean isPersonTeacher(@RequestBody String login){
+        Integer statusId = peopleService.getPeopleByLogin(login).getStatusId();
+        return statusId == 2;
+    }
+    @RequestMapping(value="/isCooker", method = RequestMethod.POST)
+    public Boolean isPersonCooker(@RequestBody String login){
+        Integer statusId = peopleService.getPeopleByLogin(login).getStatusId();
+        return statusId == 6;
+    }
 }

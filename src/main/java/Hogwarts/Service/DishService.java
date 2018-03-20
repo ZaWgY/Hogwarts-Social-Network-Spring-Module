@@ -11,5 +11,6 @@ public interface DishService {
     void save(Dish dish);
     boolean isAvaliable(Dish dish);
     Integer getDishIdByName(String dish);
-
+    void delete(Integer id);
+    Dish getDishByName(String dish);
 }

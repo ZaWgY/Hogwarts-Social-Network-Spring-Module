@@ -26,8 +26,8 @@ public class CookingServiceImpl implements CookingService{
     }
 
     @Override
-    public List<Cooking> getCookingByName(Integer id) {
-        return cookingRepository.findAllByPersonId(id);
+    public List<Cooking> getCookingByName(String login) {
+        return cookingRepository.findByPersonLogin(login);
     }
 
     @Override

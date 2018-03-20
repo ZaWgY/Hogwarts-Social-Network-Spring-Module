@@ -37,9 +37,7 @@ public class DishController {
     @RequestMapping(value = "/createFoodOrder", method = RequestMethod.POST)
     public ResponseEntity createOrder(@RequestBody BaseCooking baseCooking){
         System.out.println("Заказ блюда пользователем " + baseCooking.getPersonLogin());
-        Integer personId = peopleService.getPeopleByLogin(baseCooking.getPersonLogin()).getId();
-        Integer foodId = dishService.getDishIdByName(baseCooking.getDishName());
-        Cooking current = new Cooking(personId, foodId,false, cookingService.getLatestNumber()+1);
+        Cooking current = new Cooking(baseCooking.getPersonLogin(), baseCooking.getDishName(),false, cookingService.getLatestNumber()+1);
         cookingService.save(current);
         return ResponseEntity.ok(current.getNumber());
     }
@@ -49,11 +47,11 @@ public class DishController {
         return cookingService.getAll();
     }
 
-    @RequestMapping(value = "/setCookingReady", method = RequestMethod.POST)
-    public void setCookingReady(@RequestBody Boolean flag, @RequestBody Cooking cooking){
-        cookingService.setReady(flag,cooking);
-        //Оповестить пользователя о готовности его заказа
-    }
+//    @RequestMapping(value = "/setCookingReady", method = RequestMethod.POST)
+//    public void setCookingReady(@RequestBody Boolean flag, @RequestBody Cooking cooking){
+//        cookingService.setReady(flag,cooking);
+//        //Оповестить пользователя о готовности его заказа
+//    }
 
     @RequestMapping(value = "/createNewDish", method = RequestMethod.POST)
     public ResponseEntity createNewDish(@RequestBody Dish dish){
@@ -80,4 +78,30 @@ public class DishController {
         cookingService.deleteAll();
     }
 
+    @RequestMapping(value = "/deleteDish", method = RequestMethod.POST)
+    public void deleteDish(@RequestBody Dish dish){
+        Integer id = dishService.getDishIdByName(dish.getName());
+        dishService.delete(id);
+    }
+    @RequestMapping(value = "/editDish", method = RequestMethod.POST)
+    public void editDish(@RequestBody Dish dish){
+        Dish editableDish = dishService.getDishByName(dish.getName());
+        System.out.println(editableDish.getDescription()+" "+editableDish.getCookingTime());
+        editableDish.setDescription(dish.getDescription());
+        editableDish.setCookingTime(dish.getCookingTime());
+        System.out.println(editableDish.getDescription()+" "+editableDish.getCookingTime());
+        dishService.save(editableDish);
+    }
+    @RequestMapping(value = "/getPersonCooking", method = RequestMethod.POST)
+    public List<Cooking> getPersonCooking(@RequestBody String login){
+        return cookingService.getCookingByName(login);
+    }
+    @RequestMapping(value = "/setCookingReady", method = RequestMethod.POST)
+    public void setCookingReady(@RequestBody Cooking cooking){
+        cookingService.save(cooking);
+    }
+    @RequestMapping(value = "/setCookingGiven", method = RequestMethod.POST)
+    public void setCookingGiven(@RequestBody Cooking cooking){
+        cookingService.save(cooking);
+    }
 }

@@ -41,4 +41,22 @@ public class CookingServiceImpl implements CookingService{
     public void save(Cooking cooking) {
         cookingRepository.save(cooking);
     }
+
+    @Override
+    public Integer getLatestNumber() {
+        Integer returnedValue=0;
+        List<Cooking> list =  getAll();
+        for (Cooking c:list) {
+            if(c.getNumber() > returnedValue){
+            returnedValue=c.getNumber();
+            }
+        }
+        return returnedValue;
+    }
+
+    @Override
+    public void deleteAll() {
+        cookingRepository.deleteAll();
+    }
+
 }

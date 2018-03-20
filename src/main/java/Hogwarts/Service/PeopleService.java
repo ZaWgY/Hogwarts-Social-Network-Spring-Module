@@ -15,4 +15,5 @@ public interface PeopleService {
     List<People> listOfUndecided();
     void approoveUser(People people);
     void removeAll();
+    People getPeopleByLogin(String login);
 }

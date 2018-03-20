@@ -10,16 +10,20 @@ public class Cooking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    private Integer number;
     private Integer personId;
     private Integer dishId;
     private Boolean ready;
+    private Boolean given;
+    private static Integer numberCounter=0;
 
     public Cooking(){}
 
-    public Cooking(Integer personId, Integer dishId, Boolean ready) {
+    public Cooking(Integer personId, Integer dishId, Boolean ready, Integer number) {
         this.personId = personId;
         this.dishId = dishId;
         this.ready = ready;
+        this.number = number;
     }
 
     public Integer getId() {
@@ -52,5 +56,24 @@ public class Cooking {
 
     public void setReady(Boolean ready) {
         this.ready = ready;
+    }
+
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
+    private void generateNumber(){
+        this.number = numberCounter+1;
+    }
+
+    public Boolean getGiven() {
+        return given;
+    }
+
+    public void setGiven(Boolean given) {
+        this.given = given;
     }
 }

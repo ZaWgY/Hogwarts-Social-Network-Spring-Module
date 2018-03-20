@@ -5,4 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface DishRepository extends CrudRepository<Dish, Integer> {
     Dish getById(Integer id);
+    Dish getByName(String name);
 }

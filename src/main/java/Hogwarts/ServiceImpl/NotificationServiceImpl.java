@@ -46,4 +46,16 @@ public class NotificationServiceImpl implements NotificationService {
             System.out.println("Сообщение отправлено");
         }
     }
+
+    @Override
+    public void sendApproveInfo(People user) {
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        simpleMailMessage.setTo(user.getEmail());
+        simpleMailMessage.setFrom("hogwartssocialnetwork@gmail.com");
+        simpleMailMessage.setSubject("Hogwarts social network registration approved");
+        simpleMailMessage.setText("Здравствуйте "+user.getName()+","+'\n'+"Ваша заявка на регестрацию была принята. Посетите ваш личный кабинет чтобы узнать больше.");
+        System.out.println("Отправка сообщения юзеру..");
+        javaMailSender.send(simpleMailMessage);
+        System.out.println("Сообщение юзера отправлено");
+    }
 }

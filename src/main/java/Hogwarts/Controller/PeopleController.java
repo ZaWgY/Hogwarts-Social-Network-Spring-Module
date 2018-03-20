@@ -30,12 +30,12 @@ public class PeopleController {
 
     @RequestMapping(value = "/addHuman", method = RequestMethod.GET)
     public void addTestHuman(){
-        peopleService.save(new People("Naruto","Uzumaki","login7","password",1,"legenda2121@mail.ru","Gryffindor"));
-        peopleService.save(new People("Boruto","Uzumaki","login8","password",2,"legenda2121@mail.ru","Gryffindor"));
-        peopleService.save(new People("Sakura","Uzumaki","login9","password",3,"legenda2121@mail.ru","Gryffindor"));
-        peopleService.save(new People("Sasuke","Uzumaki","login10","password",4,"legenda2121@mail.ru","Gryffindor"));
-        peopleService.save(new People("Kakash","Uzumaki","login11","password",3,"legenda2121@mail.ru","Gryffindor"));
-        peopleService.save(new People("Kawaki","Uzumaki","login12","password",4,"legenda2121@mail.ru","Gryffindor"));
+        peopleService.save(new People("Naruto","Uzumaki","login1","password",1,"legenda2121@mail.ru","Gryffindor"));
+        peopleService.save(new People("Boruto","Uzumaki","login2","password",2,"legenda2121@mail.ru","Gryffindor"));
+        peopleService.save(new People("Sakura","Uzumaki","login3","password",3,"legenda2121@mail.ru","Gryffindor"));
+        peopleService.save(new People("Sasuke","Uzumaki","login4","password",4,"legenda2121@mail.ru","Gryffindor"));
+        peopleService.save(new People("Kakash","Uzumaki","login5","password",5,"legenda2121@mail.ru","Gryffindor"));
+        peopleService.save(new People("Kawaki","Uzumaki","login6","password",6,"legenda2121@mail.ru","Gryffindor"));
     }
     @RequestMapping(value = "/registerPerson", method = RequestMethod.POST)
     public ResponseEntity registerUser(@RequestBody People people){
@@ -50,7 +50,7 @@ public class PeopleController {
                 return ResponseEntity.ok(HttpStatus.BAD_REQUEST);
             }
             peopleService.save(new People(people.getName(),people.getSurname(),people.getLogin(),people.getPassword(),4,people.getEmail(),"undecided"));
-            notificationService.sendRegInfoNotification(new People(people.getName(),people.getSurname(),people.getLogin(),people.getPassword(),4,people.getEmail(),"undecided"),peopleService.listOfAdmins());
+//            notificationService.sendRegInfoNotification(new People(people.getName(),people.getSurname(),people.getLogin(),people.getPassword(),4,people.getEmail(),"undecided"),peopleService.listOfAdmins());
             return ResponseEntity.ok(HttpStatus.OK);
         }
         return ResponseEntity.ok(HttpStatus.CONFLICT);
@@ -68,6 +68,9 @@ public class PeopleController {
         if (result == 2){
             return ResponseEntity.ok(HttpStatus.FOUND);
         }
+        if (result == 3){
+            return ResponseEntity.ok(HttpStatus.FORBIDDEN);
+        }
         return  ResponseEntity.ok(HttpStatus.BAD_REQUEST);
     }
     @RequestMapping(value = "/undecidedUsers", method = RequestMethod.GET)
@@ -84,9 +87,20 @@ public class PeopleController {
     public void approveUser(@RequestBody People people){
         System.out.println("Дарова");
         this.peopleService.approoveUser(people);
+        notificationService.sendApproveInfo(people);
     }
     @RequestMapping(value = "/deleteAlPeople", method = RequestMethod.GET)
     public void deleteUsers(){
         peopleService.removeAll();
+    }
+
+    @RequestMapping(value = "/getStatusByLogin", method = RequestMethod.POST)
+    public  Integer getStatusByLogin(@RequestBody String login){
+        People people = peopleService.getPeopleByLogin(login);
+        return people.getStatusId();
+    }
+    @RequestMapping(value = "/getPeopleByLogin", method = RequestMethod.POST)
+    public People getPeopleByLogin(@RequestBody String login){
+        return peopleService.getPeopleByLogin(login);
     }
 }

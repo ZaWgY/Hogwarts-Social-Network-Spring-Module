@@ -74,6 +74,9 @@ public class PeopleServiceImpl implements PeopleService {
                 returnValue = 1;
                 if(p.getPassword().equals(people.getPassword())){
                     returnValue = 2;
+                    if (p.getStatusId() == 4){
+                        returnValue = 3;
+                    }
                 }
             }
         }
@@ -108,4 +111,10 @@ public class PeopleServiceImpl implements PeopleService {
     public void removeAll() {
         peopleRepository.deleteAll();
     }
+
+    @Override
+    public People getPeopleByLogin(String login) {
+        return peopleRepository.findByLogin(login);
+    }
+
 }

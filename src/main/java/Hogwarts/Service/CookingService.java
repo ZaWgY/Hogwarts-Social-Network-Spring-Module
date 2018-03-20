@@ -10,4 +10,6 @@ public interface CookingService {
     List<Cooking> getCookingByName(Integer id);
     void setReady(Boolean flag, Cooking id);
     void save(Cooking cooking);
+    Integer getLatestNumber();
+    void deleteAll();
 }

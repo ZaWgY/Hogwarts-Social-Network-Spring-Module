@@ -10,4 +10,6 @@ public interface DishService {
     void changeDescription(String description, Integer id);
     void save(Dish dish);
     boolean isAvaliable(Dish dish);
+    Integer getDishIdByName(String dish);
+
 }

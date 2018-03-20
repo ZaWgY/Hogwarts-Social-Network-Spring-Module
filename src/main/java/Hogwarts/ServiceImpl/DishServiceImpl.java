@@ -53,4 +53,14 @@ public class DishServiceImpl implements DishService {
         }
         return true;
     }
+
+    @Override
+    public Integer getDishIdByName(String dish) {
+        Dish currentDish = dishRepository.getByName(dish);
+        return currentDish.getId();
+    }
+
+
+
+
 }

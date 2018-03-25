@@ -110,6 +110,7 @@ public class PeopleController {
     }
     @RequestMapping(value="/isAdmin", method = RequestMethod.POST)
     public Boolean isPersonAdmin(@RequestBody String login){
+        System.out.println("Является ли "+login+" админом?");
         Integer statusId = peopleService.getPeopleByLogin(login).getStatusId();
         return statusId == 3;
     }

@@ -1,7 +1,9 @@
 package Hogwarts.ServiceImpl;
 
+import Hogwarts.Domain.People;
 import Hogwarts.Domain.Raid;
 import Hogwarts.Domain.RaidRespond;
+import Hogwarts.Repository.PeopleRepository;
 import Hogwarts.Repository.RaidRepository;
 import Hogwarts.Repository.RaidRespondRepository;
 import Hogwarts.Service.RaidService;
@@ -16,11 +18,13 @@ import java.util.List;
 public class RaidServiceImpl implements RaidService {
     private RaidRepository raidRepository;
     private RaidRespondRepository raidRespondRepository;
+    private PeopleRepository peopleRepository;
 
     @Autowired
-    public RaidServiceImpl(RaidRepository raidRepository, RaidRespondRepository raidRespondRepository) {
+    public RaidServiceImpl(RaidRepository raidRepository, RaidRespondRepository raidRespondRepository, PeopleRepository peopleRepository) {
         this.raidRepository = raidRepository;
         this.raidRespondRepository = raidRespondRepository;
+        this.peopleRepository = peopleRepository;
     }
 
     @Override
@@ -75,4 +79,57 @@ public class RaidServiceImpl implements RaidService {
         }
         return true;
     }
+
+    @Override
+    public List<RaidRespond> getRaidResonds() {
+        List<RaidRespond> list = new ArrayList<>();
+        raidRespondRepository.findAll().forEach(list::add);
+        return list;
+    }
+
+    @Override
+    public Boolean checkRaidRespond(String login, String raid) {
+        Raid raid1 = raidRepository.getRaidByName(raid);
+        if (raid1.getNumberOfRequiredStudents().equals(raid1.getNumberOfCurrentStudents())){
+            return false;
+        }
+        List<RaidRespond> list = getRaidResonds();
+        for (RaidRespond r:list) {
+            if (r.getUserName().equals(login)){
+                if(r.getRaidName().equals(raid)){
+                    return false;
+                }
+            }
+        }
+        raid1.setNumberOfCurrentStudents(raid1.getNumberOfCurrentStudents()+1);
+        raidRepository.save(raid1);
+        return true;
+    }
+
+    @Override
+    public void deleteAll() {
+        raidRespondRepository.deleteAll();
+    }
+
+    @Override
+    public void deleteAllRaids() {
+        raidRepository.deleteAll();
+    }
+
+    @Override
+    public void setRaidUnactive(String raidName) {
+       Raid raid = raidRepository.getRaidByName(raidName);
+       raid.setActive(false);
+       raidRepository.save(raid);
+    }
+
+    @Override
+    public void addPoints(RaidRespond raidRespond) {
+        Raid raid =raidRepository.getRaidByName(raidRespond.getRaidName());
+        Integer points = raid.getPoints();
+        People people = peopleRepository.findByLogin(raidRespond.getUserName());
+        people.addPoints(points);
+        peopleRepository.save(people);
+    }
 }
+

@@ -19,6 +19,7 @@ public class People {
     private Integer statusId;
     private Integer health = 100;
     private Integer fatigue = 0;
+    private Integer points = 0;
 
     public People(String name, String surname, String login, String password,Integer statusId, String email, String facultyId, Integer health, Integer fatigue) {
         this.name = name;
@@ -122,5 +123,16 @@ public class People {
 
     public void setFacultyId(String facultyId) {
         this.facultyId = facultyId;
+    }
+
+    public Integer getPoints() {
+        return points;
+    }
+
+    public void setPoints(Integer points) {
+        this.points = points;
+    }
+    public void addPoints(Integer points){
+        this.points += points;
     }
 }

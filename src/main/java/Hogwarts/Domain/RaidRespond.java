@@ -18,6 +18,7 @@ public class RaidRespond {
         this.raidName = raidName;
     }
 
+    public RaidRespond(){}
     public Integer getId() {
         return id;
     }

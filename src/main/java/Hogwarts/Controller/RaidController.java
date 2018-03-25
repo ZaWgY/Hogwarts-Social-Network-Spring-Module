@@ -33,14 +33,19 @@ public class RaidController {
     }
     @RequestMapping(value = "/addBasicRaids", method = RequestMethod.GET)
     public void addBasicRaids(){
-        raidService.save(new Raid("Охота на дракона","Поход на дракона в горы драконов",20,30,40,15));
-        raidService.save(new Raid("Поимка тролля","Необходимо поймать сбежавшего тролля",20,30,40,15));
-        raidService.save(new Raid("Игра в квиддич","Турнир по квиддичу",20,30,40,15));
-        raidService.save(new Raid("Задание по зельеварению","Необходимо сварить зелье невидомости",20,30,40,15));
+        raidService.save(new Raid("Охота на дракона","Поход на дракона в горы драконов",15,5));
+        raidService.save(new Raid("Поимка тролля","Необходимо поймать сбежавшего тролля",15,5));
+        raidService.save(new Raid("Игра в квиддич","Турнир по квиддичу",15,5));
+        raidService.save(new Raid("Задание по зельеварению","Необходимо сварить зелье невидомости",15,5));
     }
     @RequestMapping(value = "/saveRaidRespond", method = RequestMethod.POST)
-    public void addRaidRespond(@RequestBody RaidRespond raidRespond){
-        this.raidService.addRaidRespond(new RaidRespond(raidRespond.getUserName(),raidRespond.getRaidName()));
+    public Boolean addRaidRespond(@RequestBody RaidRespond raidRespond){
+        if (raidService.checkRaidRespond(raidRespond.getUserName(),raidRespond.getRaidName())){
+            this.raidService.addRaidRespond(new RaidRespond(raidRespond.getUserName(),raidRespond.getRaidName()));
+
+            return true;
+        }
+        return false;
     }
     @RequestMapping(value = "/getAllRaidsByName", method = RequestMethod.POST)
     public List<RaidRespond> getAllRaidsByName(@RequestBody String login){
@@ -49,11 +54,31 @@ public class RaidController {
     @RequestMapping(value = "/addNewRaid", method = RequestMethod.POST)
     public Boolean addNewRaid(@RequestBody Raid raid){
         if (raidService.checkAvailiable(raid.getName())){
-            raidService.save(new Raid(raid.getName(),raid.getDescription(),raid.getExpiredFatigue(),raid.getMinExpiredHealth(),raid.getMaxExpiredHealth(),raid.getNumberOfRequiredStudents()));
+            raidService.save(new Raid(raid.getName(),raid.getDescription(),raid.getNumberOfRequiredStudents(),raid.getPoints()));
             System.out.println("Рейд добавлен");
             return true;
         }
         return false;
     }
+    @RequestMapping(value = "/getAllRaidResponse", method = RequestMethod.GET)
+    public List<RaidRespond> getAllRaidResponse(){
+        return this.raidService.getRaidResonds();
+    }
+    @RequestMapping(value = "/deleteAllRaidsResponds", method = RequestMethod.GET)
+    public void deleteAllRaidsResponds(){
+        raidService.deleteAll();
+    }
+    @RequestMapping(value = "/deleteAllRaids", method = RequestMethod.GET)
+    public void deleteAllRaids(){
+        raidService.deleteAllRaids();
+    }
 
+    @RequestMapping(value = "/setRaidUnactive", method = RequestMethod.POST)
+    public void setRaidUnactive(@RequestBody String raidName){
+        raidService.setRaidUnactive(raidName);
+    }
+    @RequestMapping(value = "/addPoints", method = RequestMethod.POST)
+    public void addPoints(@RequestBody RaidRespond raidRespond){
+        raidService.addPoints(raidRespond);
+    }
 }

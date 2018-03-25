@@ -16,4 +16,12 @@ public interface RaidService {
     void addRaidRespond(RaidRespond raidRespond);
     List<RaidRespond> getRaidsByLogin(String login);
     Boolean checkAvailiable(String name);
+    List<RaidRespond> getRaidResonds();
+    Boolean checkRaidRespond(String login, String raid);
+    void deleteAll();
+    void deleteAllRaids();
+
+    void setRaidUnactive(String raidName);
+
+    void addPoints(RaidRespond raidRespond);
 }

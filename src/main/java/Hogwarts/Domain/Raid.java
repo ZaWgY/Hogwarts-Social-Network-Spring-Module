@@ -12,35 +12,26 @@ public class Raid {
     private String name;
     @Column(name = "description")
     private String description;
-    @Column(name = "expired_fatidue")
-    private Integer expiredFatigue;
-    @Column(name = "min_expired_health")
-    private Integer minExpiredHealth;
-    @Column(name = "max_expired_health")
-    private Integer maxExpiredHealth;
     @Column(name = "illness_probability")
     private Integer illnessProbability;
     private Integer numberOfRequiredStudents;
     private Integer numberOfCurrentStudents;
+    private Integer points;
     private Boolean isActive;
 
     public Raid(String name, String description, Integer expiredFatigue, Integer minExpiredHealth, Integer maxExpiredHealth) {
         this.name = name;
         this.description = description;
-        this.expiredFatigue = expiredFatigue;
-        this.minExpiredHealth = minExpiredHealth;
-        this.maxExpiredHealth = maxExpiredHealth;
         this.isActive = true;
     }
 
-    public Raid(String name, String description, Integer expiredFatigue, Integer minExpiredHealth, Integer maxExpiredHealth, Integer numberOfRequiredStudents) {
+    public Raid(String name, String description, Integer numberOfRequiredStudents, Integer points) {
         this.name = name;
         this.description = description;
-        this.expiredFatigue = expiredFatigue;
-        this.minExpiredHealth = minExpiredHealth;
-        this.maxExpiredHealth = maxExpiredHealth;
         this.numberOfRequiredStudents = numberOfRequiredStudents;
+        this.numberOfCurrentStudents = 0;
         this.isActive = true;
+        this.points = points;
     }
 
     public Raid() {
@@ -70,29 +61,6 @@ public class Raid {
         this.description = description;
     }
 
-    public Integer getExpiredFatigue() {
-        return expiredFatigue;
-    }
-
-    public void setExpiredFatigue(Integer expiredFatigue) {
-        this.expiredFatigue = expiredFatigue;
-    }
-
-    public Integer getMinExpiredHealth() {
-        return minExpiredHealth;
-    }
-
-    public void setMinExpiredHealth(Integer minExpiredHealth) {
-        this.minExpiredHealth = minExpiredHealth;
-    }
-
-    public Integer getMaxExpiredHealth() {
-        return maxExpiredHealth;
-    }
-
-    public void setMaxExpiredHealth(Integer maxExpiredHealth) {
-        this.maxExpiredHealth = maxExpiredHealth;
-    }
 
     public Integer getIllnessProbability() {
         return illnessProbability;
@@ -124,5 +92,13 @@ public class Raid {
 
     public void setActive(Boolean active) {
         isActive = active;
+    }
+
+    public Integer getPoints() {
+        return points;
+    }
+
+    public void setPoints(Integer points) {
+        this.points = points;
     }
 }

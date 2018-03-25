@@ -20,7 +20,19 @@ public class People {
     private Integer health = 100;
     private Integer fatigue = 0;
 
-    public People(String name, String surname, String login, String password, Integer statusId, String email,String facultyId) {
+    public People(String name, String surname, String login, String password,Integer statusId, String email, String facultyId, Integer health, Integer fatigue) {
+        this.name = name;
+        this.surname = surname;
+        this.login = login;
+        this.password = password;
+        this.email = email;
+        this.facultyId = facultyId;
+        this.statusId = statusId;
+        this.health = health;
+        this.fatigue = fatigue;
+    }
+
+    public People(String name, String surname, String login, String password, Integer statusId, String email, String facultyId) {
         this.name = name;
         this.surname = surname;
         this.login = login;

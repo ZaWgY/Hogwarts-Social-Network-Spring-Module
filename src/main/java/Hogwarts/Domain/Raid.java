@@ -20,14 +20,27 @@ public class Raid {
     private Integer maxExpiredHealth;
     @Column(name = "illness_probability")
     private Integer illnessProbability;
+    private Integer numberOfRequiredStudents;
+    private Integer numberOfCurrentStudents;
+    private Boolean isActive;
 
-    public Raid(String name, String description, Integer expiredFatigue, Integer minExpiredHealth, Integer maxExpiredHealth, Integer illnessProbability) {
+    public Raid(String name, String description, Integer expiredFatigue, Integer minExpiredHealth, Integer maxExpiredHealth) {
         this.name = name;
         this.description = description;
         this.expiredFatigue = expiredFatigue;
         this.minExpiredHealth = minExpiredHealth;
         this.maxExpiredHealth = maxExpiredHealth;
-        this.illnessProbability = illnessProbability;
+        this.isActive = true;
+    }
+
+    public Raid(String name, String description, Integer expiredFatigue, Integer minExpiredHealth, Integer maxExpiredHealth, Integer numberOfRequiredStudents) {
+        this.name = name;
+        this.description = description;
+        this.expiredFatigue = expiredFatigue;
+        this.minExpiredHealth = minExpiredHealth;
+        this.maxExpiredHealth = maxExpiredHealth;
+        this.numberOfRequiredStudents = numberOfRequiredStudents;
+        this.isActive = true;
     }
 
     public Raid() {
@@ -87,5 +100,29 @@ public class Raid {
 
     public void setIllnessProbability(Integer illnessProbability) {
         this.illnessProbability = illnessProbability;
+    }
+
+    public Integer getNumberOfRequiredStudents() {
+        return numberOfRequiredStudents;
+    }
+
+    public void setNumberOfRequiredStudents(Integer numberOfRequiredStudents) {
+        this.numberOfRequiredStudents = numberOfRequiredStudents;
+    }
+
+    public Integer getNumberOfCurrentStudents() {
+        return numberOfCurrentStudents;
+    }
+
+    public void setNumberOfCurrentStudents(Integer numberOfCurrentStudents) {
+        this.numberOfCurrentStudents = numberOfCurrentStudents;
+    }
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
     }
 }

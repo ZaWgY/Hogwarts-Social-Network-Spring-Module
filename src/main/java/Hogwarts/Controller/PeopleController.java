@@ -30,12 +30,12 @@ public class PeopleController {
 
     @RequestMapping(value = "/addHuman", method = RequestMethod.GET)
     public void addTestHuman(){
-        peopleService.save(new People("Naruto","Uzumaki","login1","password",1,"legenda2121@mail.ru","Gryffindor"));
-        peopleService.save(new People("Boruto","Uzumaki","login2","password",2,"legenda2121@mail.ru","Gryffindor"));
-        peopleService.save(new People("Sakura","Uzumaki","login3","password",3,"legenda2121@mail.ru","Gryffindor"));
-        peopleService.save(new People("Sasuke","Uzumaki","login4","password",4,"legenda2121@mail.ru","Gryffindor"));
-        peopleService.save(new People("Kakash","Uzumaki","login5","password",5,"legenda2121@mail.ru","Gryffindor"));
-        peopleService.save(new People("Kawaki","Uzumaki","login6","password",6,"legenda2121@mail.ru","Gryffindor"));
+        peopleService.save(new People("Naruto","Uzumaki","login1","password",1,"legenda2121@mail.ru","Gryffindor",100,0));
+        peopleService.save(new People("Boruto","Uzumaki","login2","password",2,"legenda2121@mail.ru","Gryffindor",100,0));
+        peopleService.save(new People("Sakura","Uzumaki","login3","password",3,"legenda2121@mail.ru","Gryffindor",100,0));
+        peopleService.save(new People("Sasuke","Uzumaki","login4","password",4,"legenda2121@mail.ru","Gryffindor",100,0));
+        peopleService.save(new People("Kakash","Uzumaki","login5","password",5,"legenda2121@mail.ru","Gryffindor",100,0));
+        peopleService.save(new People("Kawaki","Uzumaki","login6","password",6,"legenda2121@mail.ru","Gryffindor",100,0));
     }
     @RequestMapping(value = "/registerPerson", method = RequestMethod.POST)
     public ResponseEntity registerUser(@RequestBody People people){
@@ -115,12 +115,21 @@ public class PeopleController {
     }
     @RequestMapping(value="/isTeacher", method = RequestMethod.POST)
     public Boolean isPersonTeacher(@RequestBody String login){
+        System.out.println("Является ли "+login+" учителем?");
         Integer statusId = peopleService.getPeopleByLogin(login).getStatusId();
         return statusId == 2;
     }
     @RequestMapping(value="/isCooker", method = RequestMethod.POST)
     public Boolean isPersonCooker(@RequestBody String login){
+        System.out.println("Является ли "+login+" поваром?");
         Integer statusId = peopleService.getPeopleByLogin(login).getStatusId();
         return statusId == 6;
+    }
+    @RequestMapping(value="/getHealth", method = RequestMethod.POST)
+    public Integer getHealth(@RequestBody String login){
+        System.out.println("Получение здоровья юзера "+login);
+       People people = peopleService.getPeopleByLogin(login);
+       return people.getHealth();
+
     }
 }

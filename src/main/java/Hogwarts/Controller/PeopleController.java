@@ -133,5 +133,9 @@ public class PeopleController {
        return people.getHealth();
 
     }
+    @RequestMapping(value = "/getPersonPoints", method = RequestMethod.POST)
+    public Integer getPointsPerson(@RequestBody String login){
+        return peopleService.getPeopleByLogin(login).getPoints();
+    }
 
 }

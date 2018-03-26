@@ -137,5 +137,11 @@ public class PeopleController {
     public Integer getPointsPerson(@RequestBody String login){
         return peopleService.getPeopleByLogin(login).getPoints();
     }
+    @RequestMapping(value = "/isStudent", method = RequestMethod.POST)
+    public Boolean isPersonStudent(@RequestBody String login){
+        System.out.println("Является ли "+login+" Учеником?");
+        Integer statusId = peopleService.getPeopleByLogin(login).getStatusId();
+        return statusId == 1;
+    }
 
 }

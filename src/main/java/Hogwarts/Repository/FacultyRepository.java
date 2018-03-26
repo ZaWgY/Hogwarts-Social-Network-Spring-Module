@@ -4,4 +4,5 @@ import Hogwarts.Domain.Faculty;
 import org.springframework.data.repository.CrudRepository;
 
 public interface FacultyRepository extends CrudRepository<Faculty, String> {
+    Faculty findByName(String name);
 }

@@ -32,4 +32,20 @@ public class FacultyController {
         facultyService.save(new Faculty("Ravenclaw",0));
         facultyService.save(new Faculty("Slytherin",0));
     }
+    @RequestMapping(value = "/getGryfPoints", method = RequestMethod.GET)
+    public Integer getGryfPoints(){
+        return facultyService.getFacultyPoints("Gryffindor");
+    }
+    @RequestMapping(value = "/getHuffPoints", method = RequestMethod.GET)
+    public Integer getHuffPoints(){
+        return facultyService.getFacultyPoints("Hufflepuff");
+    }
+    @RequestMapping(value = "/getRavenPoints", method = RequestMethod.GET)
+    public Integer getRavenPoints(){
+        return facultyService.getFacultyPoints("Ravenclaw");
+    }
+    @RequestMapping(value = "/getSlythPoints", method = RequestMethod.GET)
+    public Integer getSlithPoints(){
+        return facultyService.getFacultyPoints("Slytherin");
+    }
 }

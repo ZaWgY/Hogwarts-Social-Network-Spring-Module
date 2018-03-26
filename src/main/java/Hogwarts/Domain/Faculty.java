@@ -32,4 +32,5 @@ public class Faculty {
     public void setPoints(Integer points) {
         this.points = points;
     }
+
 }

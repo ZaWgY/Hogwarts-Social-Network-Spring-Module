@@ -135,4 +135,19 @@ public class People {
     public void addPoints(Integer points){
         this.points += points;
     }
+    public String getFacutyNameById(Integer id){
+        if(id.equals(1)){
+            return "Gryffindor";
+        }
+        if(id.equals(2)){
+            return "Hufflepuff";
+        }
+        if(id.equals(3)){
+            return "Ravenclaw";
+        }
+        if(id.equals(4)){
+            return "Slytherin";
+        }
+        return null;
+    }
 }

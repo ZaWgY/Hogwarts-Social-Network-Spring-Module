@@ -1,8 +1,10 @@
 package Hogwarts.ServiceImpl;
 
+import Hogwarts.Domain.Faculty;
 import Hogwarts.Domain.People;
 import Hogwarts.Domain.Raid;
 import Hogwarts.Domain.RaidRespond;
+import Hogwarts.Repository.FacultyRepository;
 import Hogwarts.Repository.PeopleRepository;
 import Hogwarts.Repository.RaidRepository;
 import Hogwarts.Repository.RaidRespondRepository;
@@ -19,12 +21,14 @@ public class RaidServiceImpl implements RaidService {
     private RaidRepository raidRepository;
     private RaidRespondRepository raidRespondRepository;
     private PeopleRepository peopleRepository;
+    private FacultyRepository facultyRepository;
 
     @Autowired
-    public RaidServiceImpl(RaidRepository raidRepository, RaidRespondRepository raidRespondRepository, PeopleRepository peopleRepository) {
+    public RaidServiceImpl(FacultyRepository facultyRepository,RaidRepository raidRepository, RaidRespondRepository raidRespondRepository, PeopleRepository peopleRepository) {
         this.raidRepository = raidRepository;
         this.raidRespondRepository = raidRespondRepository;
         this.peopleRepository = peopleRepository;
+        this.facultyRepository = facultyRepository;
     }
 
     @Override
@@ -129,6 +133,9 @@ public class RaidServiceImpl implements RaidService {
         Integer points = raid.getPoints();
         People people = peopleRepository.findByLogin(raidRespond.getUserName());
         people.addPoints(points);
+        Faculty faculty = facultyRepository.findByName(people.getFacultyId());
+        faculty.setPoints(faculty.getPoints() + points);
+        facultyRepository.save(faculty);
         peopleRepository.save(people);
     }
 }
